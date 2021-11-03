@@ -1,5 +1,7 @@
 Take the postgresql image, add restic to it and finish it off with a bash script and some env variables and you get a nice way to back up arbitrary postgresql databases to a restic repo
 
+In order to support multiple postgres versions (i.e. prevent version mismatch errors), there are multiple Dockerfiles for the separate postgres version (currently 13.0 and 14.0)
+
 ## Config
 
 Configuration for DB and Restic can be achieved through these environment variables:
