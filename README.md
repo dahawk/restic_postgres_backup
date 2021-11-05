@@ -1,7 +1,5 @@
 Take the postgresql image, add restic to it and finish it off with a bash script and some env variables and you get a nice way to back up arbitrary postgresql databases to a restic repo
 
-In order to support multiple postgres versions (i.e. prevent version mismatch errors), there are multiple Dockerfiles for the separate postgres version (currently 13.0 and 14.0)
-
 ## Config
 
 Configuration for DB and Restic can be achieved through these environment variables:
@@ -22,6 +20,12 @@ Configuration for DB and Restic can be achieved through these environment variab
 There are no default values behind these variables, you have to provide all  of them!
 
 For the values and meanings of the RESTIC_* variables and other variables you may have to set check out the [Restic Docs](https://restic.readthedocs.io/en/latest/040_backup.html#environment-variables)
+
+## Postgres Versions
+
+In order to support multiple postgres versions the build has been made configurable via the *build-arg* flag (e.g. `docker build -t imagename --build-arg POSTGRESVERSION=13`). If left out, the default value for the build is 14 which, as of writing, will build an image for postgres version 14.0, based on alpine linux 3.14.
+
+In testing I found out that specifying the intended postgres version too closely there is a higher risk of hitting a non existent image (i.e. version 13.0 only has the tag alpine available but not alpine 3.14). Therefore I recommend specifying the postgres version by major version only. This will pull the latest alpine based image available.
 
 ## Other stuff
 

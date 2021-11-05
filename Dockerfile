@@ -1,4 +1,5 @@
-FROM alpine:3.13
+ARG POSTGRESVERSION
+FROM postgres:${POSTGRESVERSION:-14}-alpine3.14
 
 WORKDIR /opt
 
